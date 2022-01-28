@@ -11,3 +11,7 @@ install:
 	python -m pip install --upgrade pip
 	pip install -r requirements-dev.txt
 	pre-commit install
+
+.PHONY: run
+run:
+	PYTHONPATH=. python app
