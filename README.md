@@ -32,3 +32,5 @@ After that you should be good to go:
 ```bash
 make run
 ```
+
+Access the API docs on http://localhost:8001/docs
