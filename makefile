@@ -14,4 +14,4 @@ install:
 
 .PHONY: run
 run:
-	PYTHONPATH=. python app
+	uvicorn --reload --port=8001 app.api.run:api
