@@ -6,6 +6,9 @@ class Settings(BaseSettings):
     TWILIO_AUTH_TOKEN: str
     TWILIO_FROM_NUMBER: str
     TWILIO_TO_NUMBER: str
+    DEFAULT_MESSAGE: str = (
+        "Hello! You asked to be awake at this time. Have a great day!"
+    )
 
     class Config:
         env_file = ".env"
