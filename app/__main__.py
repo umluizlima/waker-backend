@@ -1,13 +1,11 @@
+from app.core.adapters import TwilioAdapter
+from app.core.services import CallService
 from app.settings import get_settings
-from app.twilio_adapter import TwilioAdapter
 
 settings = get_settings()
 twilio_adapter = TwilioAdapter(settings)
+call_service = CallService(settings, twilio_adapter)
 
-call_sid = twilio_adapter.create_call(
-    settings.TWILIO_FROM_NUMBER,
-    settings.TWILIO_TO_NUMBER,
-    settings.DEFAULT_MESSAGE,
-)
+call_sid = call_service.make_call()
 
 print(call_sid)
