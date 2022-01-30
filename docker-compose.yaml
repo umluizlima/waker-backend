@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:14.1
+    container_name: "waker-database"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "waker"
+    volumes:
+      - database-postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  database-postgres:
