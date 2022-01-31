@@ -15,4 +15,8 @@ class CallRepository(BaseRepository):
             raise ResourceNotFoundError
 
     def _filter_by_sid(self, sid: str):
-        return self.db.query(self.__model__).filter(self.__model__.sid == sid)
+        return (
+            self.db.query(self.__model__)
+            .filter(self.__model__.sid is not None)
+            .filter(self.__model__.sid == sid)
+        )
