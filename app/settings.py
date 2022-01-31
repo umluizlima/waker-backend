@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     DEFAULT_MESSAGE: str = (
         "Hello! You asked to be awake at this time. Have a great day!"
     )
+    DATABASE_URL: str = "postgresql://postgres:postgres@localhost/waker"
 
     class Config:
         env_file = ".env"

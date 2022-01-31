@@ -5,6 +5,8 @@ A project to wake you up like in a hotel.
 
 ### Requirements
 - [Python 3.10.0](https://realpython.com/intro-to-pyenv/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Installing
 Setup Python and virtualenv
@@ -15,6 +17,11 @@ make environment
 Install dependencies
 ```bash
 make install
+```
+
+### Testing
+```bash
+make test
 ```
 
 ### Running
@@ -34,3 +41,11 @@ make run
 ```
 
 Access the API docs on http://localhost:8001/docs
+
+
+### Migrating
+Generate migration files automatically for changes to models. Make sure all models are imported on `models/__init__.py`
+
+```bash
+make db_generate_migration description="your description"
+```
