@@ -34,3 +34,11 @@ make run
 ```
 
 Access the API docs on http://localhost:8001/docs
+
+
+### Migrating
+Generate migration files automatically for changes to models. Make sure all models are imported on `models/__init__.py`
+
+```bash
+make db_generate_migration description="your description"
+```
