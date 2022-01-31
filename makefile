@@ -1,9 +1,9 @@
 .PHONY: environment
 environment:
 	pyenv install -s 3.10.0
-	pyenv uninstall --force wake-up-caller
-	pyenv virtualenv 3.10.0 --force wake-up-caller
-	pyenv local wake-up-caller
+	pyenv uninstall --force waker
+	pyenv virtualenv 3.10.0 --force waker
+	pyenv local waker
 
 .PHONY: install
 install:
@@ -25,6 +25,12 @@ db_run_migrations: db_init
 db_generate_migration: db_run_migrations
 	PYTHONPATH=. \
 	alembic revision --autogenerate -m "$(description)"
+
+.PHONY: test
+test:
+	docker-compose down && \
+	PYTHONPATH=. \
+	python -m pytest
 
 .PHONY: run
 run: db_run_migrations
