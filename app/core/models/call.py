@@ -22,6 +22,6 @@ class CallStatus(str, AutoName):
 class Call(BaseModel):
     __tablename__ = "call"
 
-    sid = Column(Text, nullable=True)
+    sid = Column(Text, nullable=True, unique=True)
     scheduled_to = Column(DateTime, nullable=False)
     status = Column(SqlEnum(CallStatus), default=CallStatus.WAITING, nullable=False)
