@@ -17,6 +17,6 @@ class CallRepository(BaseRepository):
     def _filter_by_sid(self, sid: str):
         return (
             self.db.query(self.__model__)
-            .filter(self.__model__.sid is not None)
+            .filter(self.__model__.sid != None)  # noqa: E711
             .filter(self.__model__.sid == sid)
         )
