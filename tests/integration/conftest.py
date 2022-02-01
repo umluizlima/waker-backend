@@ -8,7 +8,7 @@ from testcontainers.postgres import PostgresContainer
 from app.core.database import Database
 from app.core.models.base import Base
 from app.core.repositories import CallRepository
-from tests.conftest import get_test_settings
+from app.settings import get_settings
 
 
 @fixture(scope="session", autouse=True)
@@ -17,7 +17,7 @@ def db():
     postgres_container = PostgresContainer("postgres:14.1")
     with postgres_container as postgres:
         environ["DATABASE_URL"] = postgres.get_connection_url()
-        database = Database(get_test_settings())
+        database = Database(get_settings())
         alembic_cfg = Config("alembic.ini")
         command.upgrade(alembic_cfg, "head")
         yield database
