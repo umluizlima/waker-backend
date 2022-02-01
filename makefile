@@ -29,7 +29,7 @@ db_generate_migration: db_run_migrations
 .PHONY: test
 test:
 	docker-compose down && \
-	PYTHONPATH=. \
+	PYTHONPATH=. ENV=test \
 	python -m pytest
 
 .PHONY: run
