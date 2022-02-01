@@ -1,5 +1,7 @@
-from os import environ, system
+from os import environ
 
+from alembic import command
+from alembic.config import Config
 from pytest import fixture
 from testcontainers.postgres import PostgresContainer
 
@@ -16,7 +18,8 @@ def db():
     with postgres_container as postgres:
         environ["DATABASE_URL"] = postgres.get_connection_url()
         database = Database(get_test_settings())
-        system("alembic upgrade head")
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
         yield database
 
 
