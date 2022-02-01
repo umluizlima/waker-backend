@@ -12,6 +12,12 @@ install:
 	pip install -r requirements-dev.txt
 	pre-commit install
 
+.PHONY: lint
+lint:
+	isort --check .
+	black --check .
+	flake8 .
+
 .PHONY: db_init
 db_init:
 	docker-compose up -d database
@@ -29,7 +35,7 @@ db_generate_migration: db_run_migrations
 .PHONY: test
 test:
 	docker-compose down && \
-	PYTHONPATH=. \
+	PYTHONPATH=. ENV=test \
 	python -m pytest
 
 .PHONY: run
