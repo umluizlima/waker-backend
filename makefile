@@ -12,6 +12,12 @@ install:
 	pip install -r requirements-dev.txt
 	pre-commit install
 
+.PHONY: lint
+lint:
+	isort --check .
+	black --check .
+	flake8 .
+
 .PHONY: db_init
 db_init:
 	docker-compose up -d database
