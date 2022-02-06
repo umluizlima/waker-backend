@@ -34,7 +34,7 @@ def test_create_call_endpoint_should_accept_post(create_call_response):
     assert create_call_response.status_code != HTTP_405_METHOD_NOT_ALLOWED
 
 
-def test_create_user_should_have_valid_payload(client):
+def test_create_call_should_have_valid_payload(client):
     response = create_call_request(client, call_dict_2)
     assert response.status_code == HTTP_422_UNPROCESSABLE_ENTITY
 
