@@ -34,7 +34,7 @@ db_generate_migration: db_run_migrations
 
 .PHONY: db_setup_worker
 db_setup_worker: db_init
-	PYTHONPATH=. procrastinate --app=app.worker.app schema --apply || true
+	PYTHONPATH=. procrastinate --app=app.worker.run.worker schema --apply || true
 
 .PHONY: test
 test:
@@ -48,7 +48,7 @@ run_api: db_run_migrations
 
 .PHONY: run_worker
 run_worker: db_setup_worker
-	PYTHONPATH=. procrastinate --verbose --app=app.worker.app worker
+	PYTHONPATH=. procrastinate --verbose --app=app.worker.run.worker worker
 
 .PHONY: run
 run:
