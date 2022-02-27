@@ -32,12 +32,24 @@ db_generate_migration: db_run_migrations
 	PYTHONPATH=. \
 	alembic revision --autogenerate -m "$(description)"
 
+.PHONY: db_setup_worker
+db_setup_worker: db_init
+	PYTHONPATH=. procrastinate --app=app.worker.run.worker schema --apply || true
+
 .PHONY: test
 test:
 	docker-compose down && \
 	PYTHONPATH=. ENV=test \
 	python -m pytest
 
-.PHONY: run
-run: db_run_migrations
+.PHONY: run_api
+run_api: db_run_migrations
 	uvicorn --reload --port=8001 app.api.run:api
+
+.PHONY: run_worker
+run_worker: db_setup_worker
+	PYTHONPATH=. procrastinate --verbose --app=app.worker.run.worker worker
+
+.PHONY: run
+run:
+	make -j run_api run_worker
