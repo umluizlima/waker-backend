@@ -19,7 +19,7 @@ class CallService:
         self._repository = repository
         self._worker = worker
 
-    def make_call(self, call_id: int) -> str:
+    def make_call(self, call_id: int) -> None:
         call = self._repository.find_by_id(call_id)
         response = self._adapter.create_call(
             self._settings.TWILIO_FROM_NUMBER,
