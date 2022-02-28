@@ -1,8 +1,5 @@
-from fastapi import Depends
-
-from app.settings import Settings, get_settings
-from app.worker import get_worker
+from app.worker.run import worker as worker_instance
 
 
-def worker(settings: Settings = Depends(get_settings)):
-    return get_worker(settings)
+def worker():
+    return worker_instance
