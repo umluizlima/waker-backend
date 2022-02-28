@@ -1,20 +1,18 @@
 from fastapi import APIRouter, FastAPI
 
 from app.settings import Settings
-from app.worker import get_worker
+from app.worker.run import worker
 
 router = APIRouter()
 
 
 @router.on_event("startup")
 def startup_event():
-    worker = get_worker()
     worker.start()
 
 
 @router.on_event("shutdown")
 def shutdown_event():
-    worker = get_worker()
     worker.shutdown()
 
 

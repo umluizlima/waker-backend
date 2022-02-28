@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, FastAPI
 from starlette.status import HTTP_201_CREATED
 
 from app.core.schemas import CallCreate, CallRead
-from app.core.services.call import CallService
+from app.core.services import CallService
 from app.settings import Settings
 
 from ..dependencies import call_service
