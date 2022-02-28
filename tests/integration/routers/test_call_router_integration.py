@@ -19,11 +19,16 @@ def create_call_request(client, payload):
     )
 
 
-@fixture
-def create_call_response(client, call_repository):
-    yield create_call_request(client, call_dict_1)
+@fixture(autouse=True)
+def cleanup(call_repository):
+    yield
     for call in call_repository.find_all():
         call_repository.delete_by_id(call.id)
+
+
+@fixture
+def create_call_response(client):
+    yield create_call_request(client, call_dict_1)
 
 
 def test_create_call_should_return_status_201(create_call_response):
