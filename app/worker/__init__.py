@@ -1,16 +1,11 @@
-from functools import lru_cache
+from pytz import utc
 
-from apscheduler.schedulers.background import BackgroundScheduler
-
-from ..settings import Settings, get_settings
+from ..settings import Settings
+from .worker import Worker
 
 
 def create_worker(settings: Settings):
-    worker = BackgroundScheduler()
+    worker = Worker()
+    worker.configure(timezone=utc)
 
     return worker
-
-
-@lru_cache(1)
-def get_worker():
-    return create_worker(get_settings())
