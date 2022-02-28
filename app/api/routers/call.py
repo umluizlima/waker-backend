@@ -1,20 +1,18 @@
 from fastapi import APIRouter, Depends, FastAPI
 from starlette.status import HTTP_201_CREATED
 
-from app.core.repositories import CallRepository
 from app.core.schemas import CallCreate, CallRead
+from app.core.services.call import CallService
 from app.settings import Settings
 
-from ..dependencies import call_repository
+from ..dependencies import call_service
 
 router = APIRouter()
 
 
 @router.post("/calls", response_model=CallRead, status_code=HTTP_201_CREATED)
-def create_call(
-    call: CallCreate, call_repository: CallRepository = Depends(call_repository)
-):
-    return call_repository.create(call.dict())
+def create_call(call: CallCreate, call_service: CallService = Depends(call_service)):
+    return call_service.create_call(call)
 
 
 def configure(app: FastAPI, settings: Settings):
